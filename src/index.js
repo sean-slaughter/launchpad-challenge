@@ -12,7 +12,7 @@ const theme = createMuiTheme({
     },
     secondary: {
       main: '#197278'
-    }
+    },
   }
 })
 
