@@ -1,5 +1,7 @@
-import { createMuiTheme } from '@material-ui/core';
+import { createMuiTheme, makeStyles } from '@material-ui/core';
 import './App.css';
+import MainContainer from './components/MainContainer';
+import SideNav from './components/SideNav';
 
 //create theme for color palette throughout dashboard
 const theme = createMuiTheme({
@@ -13,10 +15,18 @@ const theme = createMuiTheme({
   }
 })
 
+const useStyles = makeStyles({
+  mainWrapper: {
+    display: 'flex'
+  }
+});
+
 function App() {
+  const classes = useStyles();
   return (
-    <div className="App">
-        Hello World
+    <div className={classes.mainWrapper}>
+      <SideNav/>
+      <MainContainer/>
     </div>
   );
 }
