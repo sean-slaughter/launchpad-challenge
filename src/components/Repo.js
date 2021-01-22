@@ -17,12 +17,12 @@ const Repo = ({repo}) => {
     const fetchWeeklyCommits = () =>{
         fetch(repo.github_url + "stats/participation")
         .then(resp => resp.json())
-        .then(hourlyCommits => setHourlyCommits(hourlyCommits))
+        .then(weeklyCommits => setWeeklyCommits(weeklyCommits))
     }
     const fetchYearlyCommits = () =>{
         fetch(repo.github_url + "/punch_card")
         .then(resp => resp.json())
-        .then(hourlyCommits => setHourlyCommits(hourlyCommits))
+        .then(yearlyCommits => setHourlyCommits(yearlyCommits))
     }
     const fetchStarsAndIssues = () =>{
         fetch(repo.github_url + "/punch_card")
