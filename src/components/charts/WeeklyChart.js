@@ -6,58 +6,23 @@ import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
-const WeeklyChart = ({ weeklyCommits, loading }) => {
+const WeeklyChart = ({ days, loading }) => {
 
-  const days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
+  const chartDays = [
+    "Sun",
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat",
   ];
 
-  const getChartValues = () => {
-    const output = {};
-    for (let i = 0; i < days.length; i++) {
-      output[days[i]] = loading ? 0 : weeklyCommits.days[i];
-    }
-    return output;
-  };
-
-  const values = getChartValues();
-
-  const chartData = [
-    {
-      label: "Sun",
-      value: values.Sunday,
-    },
-    {
-      label: "Mon",
-      value: values.Monday,
-    },
-    {
-      label: "Tues",
-      value: values.Tuesday,
-    },
-    {
-      label: "Wed",
-      value: values.Wednesday,
-    },
-    {
-      label: "Thu",
-      value: values.Thursday,
-    },
-    {
-      label: "Fri",
-      value: values.Friday,
-    },
-    {
-      label: "Sat",
-      value: values.Saturday,
-    },
-  ];
+  const chartData = chartDays.map((day, index) => {
+    return loading
+      ? { label: day, value: 0 }
+      : { label: day, value: days[index] };
+  });
 
   const chartConfigs = {
     type: "column2d",
