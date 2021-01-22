@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import WeeklyChart from './charts/WeeklyChart';
 
 
 const Repo = ({repo}) => {
@@ -9,6 +10,7 @@ const Repo = ({repo}) => {
     const [yearlyCommits, setYearlyCommits] = useState(null);
     const [issues, setIssues] = useState(null);
     const [stars, setStars] = useState(null);
+    const [loading, setLoading] = useState(true)
 
     const fetchCommitActivity = () =>{
         fetch(repo.github_url + commitURL)
@@ -36,17 +38,29 @@ const Repo = ({repo}) => {
         return data.reduce((acc, curr) => {return acc + curr.total}, 0)
     }
 
+    const checkLoading = () => {
+        if(weeklyCommits != null && yearlyCommits != null && issues != null && stars != null){
+            setLoading(false);
+        }
+    }
+
     useEffect(() => {
         fetchCommitActivity();
         fetchStarsAndIssues();
     }, [])
 
+    useEffect(() => {
+        checkLoading();
+    }, [weeklyCommits, yearlyCommits, stars, issues])
+
     return (
         <div>
-            {repo.name}
-            {repo.url}
-            {repo.github_url}
-            {repo.icon}
+           {repo.icon}{repo.name}<br/>
+            Commits in the past week: {loading ? 0 : weeklyCommits.total}<br/>
+            Commits in the past year: {loading ? 0 : yearlyCommits}<br/>
+            Current open issues: {loading ? 0 : issues}<br/>
+            Current number of stars: {loading ? 0 : stars}<br/>
+            <WeeklyChart weeklyCommits={weeklyCommits} loading={loading}/>
         </div>
     );
 }
