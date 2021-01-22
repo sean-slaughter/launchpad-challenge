@@ -3,38 +3,43 @@ import React, { useEffect, useState } from 'react';
 
 const Repo = ({repo}) => {
 
-    const [hourlyCommits, setHourlyCommits] = useState({});
-    const [weeklyCommits, setMonthlyCommits] = useState({});
-    const [yearlyCommits, setYearlyCommits] = useState({});
-    const [issues, setIssues] = useState(0);
-    const [stars, setStars] = useState(0);
+    const commitURL = "/stats/commit_activity";
 
-    const fetchHourlyCommits = () =>{
-        fetch(repo.github_url + "stats/punch_card")
+    const [weeklyCommits, setWeeklyCommits] = useState(null);
+    const [yearlyCommits, setYearlyCommits] = useState(null);
+    const [issues, setIssues] = useState(null);
+    const [stars, setStars] = useState(null);
+
+    const fetchCommitActivity = () =>{
+        fetch(repo.github_url + commitURL)
         .then(resp => resp.json())
-        .then(hourlyCommits => setHourlyCommits(hourlyCommits))
+        .then(data => setRepoState(data))
     }
-    const fetchWeeklyCommits = () =>{
-        fetch(repo.github_url + "stats/participation")
-        .then(resp => resp.json())
-        .then(weeklyCommits => setWeeklyCommits(weeklyCommits))
-    }
-    const fetchYearlyCommits = () =>{
-        fetch(repo.github_url + "/punch_card")
-        .then(resp => resp.json())
-        .then(yearlyCommits => setHourlyCommits(yearlyCommits))
-    }
-    const fetchStarsAndIssues = () => {
-        fetch(repo.github_url + "/punch_card")
+  
+    const fetchStarsAndIssues = () =>{
+        fetch(repo.github_url)
         .then(resp => resp.json())
         .then(data => setStarsAndIssues(data))
     }
 
-    const setStarsandIssues = (data) =>{
-        //TODO SET ISSUES AND STARS
-       // setIssues();
-       // setStars();
+    const setStarsAndIssues = (data) =>{
+       setStars(data.stargazers_count);
+       setIssues(data.open_issues_count);
     }
+
+    const setRepoState = (data) => {
+        setWeeklyCommits(data[0])
+        setYearlyCommits(sumOfWeeklyCommits(data))
+    }
+
+    const sumOfWeeklyCommits = (data) => {
+        return data.reduce((acc, curr) => {return acc + curr.total}, 0)
+    }
+
+    useEffect(() => {
+        fetchCommitActivity();
+        fetchStarsAndIssues();
+    }, [])
 
     return (
         <div>
