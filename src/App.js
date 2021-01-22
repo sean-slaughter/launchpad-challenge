@@ -3,6 +3,7 @@ import './App.css';
 import MainContainer from './components/MainContainer';
 import SideNav from './components/SideNav';
 
+
 //create theme for color palette throughout dashboard
 const theme = createMuiTheme({
   palette: {

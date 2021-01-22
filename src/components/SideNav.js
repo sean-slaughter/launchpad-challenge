@@ -1,8 +1,8 @@
 import { Divider, List, ListItemIcon, ListItemText, makeStyles, Drawer, ListItem } from '@material-ui/core';
 import React from 'react';
-import {IoHome, IoAnalytics } from 'react-icons/io5'
+import { IoHome, IoAnalytics } from 'react-icons/io5'
 import { withRouter } from 'react-router-dom';
-import repo from '../data/repos'
+import reposData from '../data/reposData'
 
 const useStyles = makeStyles({
     sidenavContainer: {
@@ -23,10 +23,9 @@ const useStyles = makeStyles({
     }
 })
 
-const SideNav = (props) => {
+const SideNav = ({history}) => {
 
-  const { history } = props;
-  const classes = useStyles();
+    const classes = useStyles();
 
   return (
     <div className={classes.sidenavContainer}>
@@ -48,7 +47,7 @@ const SideNav = (props) => {
             />
           </ListItem>
 
-          {repo.map((repo, index) => {
+          {reposData.map((repo, index) => {
             const {name, path, icon} = repo;
             return (
               <ListItem button key={index} onClick={() => history.push(path)}>
