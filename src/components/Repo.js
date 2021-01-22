@@ -24,10 +24,16 @@ const Repo = ({repo}) => {
         .then(resp => resp.json())
         .then(yearlyCommits => setHourlyCommits(yearlyCommits))
     }
-    const fetchStarsAndIssues = () =>{
+    const fetchStarsAndIssues = () => {
         fetch(repo.github_url + "/punch_card")
         .then(resp => resp.json())
-        .then(hourlyCommits => setHourlyCommits(hourlyCommits))
+        .then(data => setStarsAndIssues(data))
+    }
+
+    const setStarsandIssues = (data) =>{
+        //TODO SET ISSUES AND STARS
+       // setIssues();
+       // setStars();
     }
 
     return (
