@@ -1,27 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import WeeklyChart from './charts/WeeklyChart';
-
+import axios from 'axios';
 
 const Repo = ({repo}) => {
 
     const commitURL = "/stats/commit_activity";
 
     const [weeklyCommits, setWeeklyCommits] = useState(null);
-    const [yearlyCommits, setYearlyCommits] = useState(null);
+    const [yearlyCommitsData, setYearlyCommitsData] = useState(null);
+    const [totalYearlyCommits, setTotalYearlyCommits] = useState(null);
     const [issues, setIssues] = useState(null);
     const [stars, setStars] = useState(null);
     const [loading, setLoading] = useState(true)
 
-    const fetchCommitActivity = () =>{
-        fetch(repo.github_url + commitURL)
-        .then(resp => resp.json())
-        .then(data => setRepoState(data))
+    const fetchRepoData = () =>{
+        axios.get(repo.github_url + commitURL)
+        .then(resp => setWeeklyAndYearlyCommits(resp.data))
+        .then(() => {
+            fetchStarsAndIssues();
+        })
+        .then(() => setLoading(false))
     }
-  
-    const fetchStarsAndIssues = () =>{
-        fetch(repo.github_url)
-        .then(resp => resp.json())
-        .then(data => setStarsAndIssues(data))
+
+    const setWeeklyAndYearlyCommits = (data) => {
+        setYearlyCommitsData(data);
+        setWeeklyCommits(data[0]);
+        setTotalYearlyCommits(getTotal(data));
+    }
+
+    const fetchStarsAndIssues = () => {
+        axios.get(repo.github_url)
+        .then(resp => setStarsAndIssues(resp.data))
     }
 
     const setStarsAndIssues = (data) =>{
@@ -29,38 +38,22 @@ const Repo = ({repo}) => {
        setIssues(data.open_issues_count);
     }
 
-    const setRepoState = (data) => {
-        setWeeklyCommits(data[0])
-        setYearlyCommits(sumOfWeeklyCommits(data))
-    }
-
-    const sumOfWeeklyCommits = (data) => {
+    const getTotal = (data) => {
         return data.reduce((acc, curr) => {return acc + curr.total}, 0)
     }
 
-    const checkLoading = () => {
-        if(weeklyCommits != null && yearlyCommits != null && issues != null && stars != null){
-            setLoading(false);
-        }
-    }
-
     useEffect(() => {
-        fetchCommitActivity();
-        fetchStarsAndIssues();
+       fetchRepoData();
     }, [])
-
-    useEffect(() => {
-        checkLoading();
-    }, [weeklyCommits, yearlyCommits, stars, issues])
 
     return (
         <div>
            {repo.icon}{repo.name}<br/>
             Commits in the past week: {loading ? 0 : weeklyCommits.total}<br/>
-            Commits in the past year: {loading ? 0 : yearlyCommits}<br/>
+            Commits in the past year: {loading ? 0 : totalYearlyCommits}<br/>
             Current open issues: {loading ? 0 : issues}<br/>
             Current number of stars: {loading ? 0 : stars}<br/>
-            <WeeklyChart weeklyCommits={weeklyCommits} loading={loading}/>
+            <WeeklyChart days={loading ? null : weeklyCommits.days} loading={loading}/>
         </div>
     );
 }
