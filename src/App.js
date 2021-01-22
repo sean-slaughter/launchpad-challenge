@@ -1,7 +1,7 @@
 import { createMuiTheme, makeStyles } from '@material-ui/core';
 import './App.css';
-import MainContainer from './components/MainContainer';
-import SideNav from './components/SideNav';
+import MainContainer from './components/containers/MainContainer';
+import SideNav from './components/containers/SideNav';
 
 
 //create theme for color palette throughout dashboard

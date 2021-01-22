@@ -2,7 +2,7 @@ import { Divider, List, ListItemIcon, ListItemText, makeStyles, Drawer, ListItem
 import React from 'react';
 import { IoHome, IoAnalytics } from 'react-icons/io5'
 import { withRouter } from 'react-router-dom';
-import reposData from '../data/reposData'
+import reposData from '../../data/reposData'
 
 const useStyles = makeStyles({
     sidenavContainer: {
