@@ -7,16 +7,7 @@ import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
 const WeeklyChart = ({ data }) => {
-
-  const chartDays = [
-    "Sun",
-    "Mon",
-    "Tue",
-    "Wed",
-    "Thu",
-    "Fri",
-    "Sat",
-  ];
+  const chartDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   const chartData = chartDays.map((day, index) => {
     return { label: day, value: data[index] };
@@ -29,7 +20,7 @@ const WeeklyChart = ({ data }) => {
     dataFormat: "json",
     dataSource: {
       chart: {
-        baseFont: 'Titillium Web',
+        baseFont: "Titillium Web",
         animation: 1,
         caption: "Number of commits over the last week by day.",
         xAxisName: "Day",

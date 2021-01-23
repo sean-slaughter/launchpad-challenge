@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import ReactFC from "react-fusioncharts";
 import FusionCharts from "fusioncharts";
 import Line2D from "fusioncharts/fusioncharts.charts";
@@ -6,11 +6,11 @@ import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 
 ReactFC.fcRoot(FusionCharts, Line2D, FusionTheme);
 
-const YearlyChart = ({data}) => {
-    
-    const chartData = data.map((week, index) => {
-        return {label: index, value: week.total} 
-    })
+const YearlyChart = ({ data }) => {
+
+  const chartData = data.map((week, index) => {
+    return { label: index, value: week.total };
+  });
 
   const chartConfigs = {
     type: "line",
@@ -19,7 +19,7 @@ const YearlyChart = ({data}) => {
     dataFormat: "json",
     dataSource: {
       chart: {
-        baseFont: 'Titillium Web',
+        baseFont: "Titillium Web",
         animation: 1,
         caption: "Number of commits over the last year by week.",
         xAxisName: "Past Year",
@@ -27,15 +27,11 @@ const YearlyChart = ({data}) => {
         theme: "fusion",
       },
       data: chartData,
-      trendlines: [
-
-      ]
+      trendlines: [],
     },
   };
-    console.log(chartData)
-    return (
-        <ReactFC {...chartConfigs} />
-    );
-}
+
+  return <ReactFC {...chartConfigs} />;
+};
 
 export default YearlyChart;
