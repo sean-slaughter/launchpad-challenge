@@ -3,12 +3,32 @@ import WeeklyChart from './charts/WeeklyChart';
 import axios from 'axios';
 import YearlyChart from './charts/YearlyChart';
 import WeeklyCommits from './WeeklyCommits';
-import { Icon } from '@material-ui/core';
+import { CircularProgress, Grid, Icon, makeStyles } from '@material-ui/core';
 import YearlyCommits from './YearlyCommits';
 import OpenIssues from './OpenIssues';
 import Stars from './Stars';
 
+const useStyles = makeStyles({
+    chart: {
+        marginBottom: 20
+    },
+    card: {
+        marginBottom: 20
+    },
+    icon: {
+        margin: 20,
+        fontSize: 150,
+        color: "#22333b"
+    },
+    title: {
+        margin: 20,
+        fontSize: 150,
+        color: "#22333b"
+    }
+})
+
 const Repo = ({repo}) => {
+    const classes = useStyles();
 
     //state
     const [weeklyCommits, setWeeklyCommits] = useState(0);
@@ -61,20 +81,50 @@ const Repo = ({repo}) => {
     const renderRepoInfo = () => {
         if(!loading){
             return (
-                <Fragment>
+              <Grid container justify="center" alignItems="center" spacing={3}>
+                <Grid item xs={2}>
+                  <Icon className={classes.icon}>{repo.icon}</Icon>
+                </Grid>
+                <Grid item xs={8}>
+                  <h1 className={classes.title}>{repo.name}</h1>
+                </Grid>
+                <Grid container direction="column" xs={6}>
+                  <Grid item xs={12} className={classes.chart}>
                     <WeeklyChart data={weeklyCommits.days} />
-                    <YearlyChart data={yearlyCommitsData}/>
-                    <WeeklyCommits data={weeklyCommits.total}/>
-                    <YearlyCommits data={totalYearlyCommits}/>
-                    <OpenIssues data={issues}/>
-                    <Stars data={stars}/>
-                </Fragment>
-            )
+                  </Grid>
+                  <Grid item xs={12} className={classes.chart}>
+                    <YearlyChart data={yearlyCommitsData} />
+                  </Grid>
+                </Grid>
+                <Grid container direction="column" xs={6}>
+                  <Grid item xs={12} className={classes.card}>
+                    <WeeklyCommits
+                      className={classes.card}
+                      data={weeklyCommits.total}
+                    />
+                  </Grid>
+                  <Grid item xs={12} className={classes.card}>
+                    <YearlyCommits
+                      className={classes.card}
+                      data={totalYearlyCommits}
+                    />
+                  </Grid>
+                  <Grid item xs={12} className={classes.card}>
+                    <OpenIssues className={classes.card} data={issues} />
+                  </Grid>
+                  <Grid item xs={12} className={classes.card}>
+                    <Stars className={classes.card} data={stars} />
+                  </Grid>
+                </Grid>
+              </Grid>
+            );
         }
+        else return (
+            <CircularProgress color="#22333b"/>
+        )
     }
     return (
         <div>
-            <Icon>{repo.icon}</Icon> <h1>{repo.name}</h1>
             {renderRepoInfo()}
         </div>
     );
