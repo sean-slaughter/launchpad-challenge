@@ -6,10 +6,10 @@ import reposData from '../../data/reposData'
 
 const useStyles = makeStyles({
     sidenavContainer: {
-        width: 400,
+       
     },
     sidenav:{
-        background: "#283d3b",
+        background: "#22333b",
         color: "white",
         fontSize: 25 
     },

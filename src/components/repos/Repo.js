@@ -2,15 +2,20 @@ import React, { Fragment, useEffect, useState } from 'react';
 import WeeklyChart from './charts/WeeklyChart';
 import axios from 'axios';
 import YearlyChart from './charts/YearlyChart';
+import WeeklyCommits from './WeeklyCommits';
+import { Icon } from '@material-ui/core';
+import YearlyCommits from './YearlyCommits';
+import OpenIssues from './OpenIssues';
+import Stars from './Stars';
 
 const Repo = ({repo}) => {
 
     //state
-    const [weeklyCommits, setWeeklyCommits] = useState(null);
+    const [weeklyCommits, setWeeklyCommits] = useState(0);
     const [yearlyCommitsData, setYearlyCommitsData] = useState(null);
-    const [totalYearlyCommits, setTotalYearlyCommits] = useState(null);
-    const [issues, setIssues] = useState(null);
-    const [stars, setStars] = useState(null);
+    const [totalYearlyCommits, setTotalYearlyCommits] = useState(0);
+    const [issues, setIssues] = useState(0);
+    const [stars, setStars] = useState(0);
     const [loading, setLoading] = useState(true)
 
     //fetch data from Github API
@@ -53,25 +58,24 @@ const Repo = ({repo}) => {
     }, [])
 
     //only render charts if data is loaded
-    const getCharts = () => {
+    const renderRepoInfo = () => {
         if(!loading){
             return (
                 <Fragment>
                     <WeeklyChart data={weeklyCommits.days} />
                     <YearlyChart data={yearlyCommitsData}/>
+                    <WeeklyCommits data={weeklyCommits.total}/>
+                    <YearlyCommits data={totalYearlyCommits}/>
+                    <OpenIssues data={issues}/>
+                    <Stars data={stars}/>
                 </Fragment>
             )
         }
     }
     return (
         <div>
-            <img src={repo.logo}></img>
-           <h1>{repo.name}</h1>
-            Commits in the past week: {loading ? 0 : weeklyCommits.total}<br/>
-            Commits in the past year: {loading ? 0 : totalYearlyCommits}<br/>
-            Current open issues: {loading ? 0 : issues}<br/>
-            Current number of stars: {loading ? 0 : stars}<br/>
-            {getCharts()}
+            <Icon>{repo.icon}</Icon> <h1>{repo.name}</h1>
+            {renderRepoInfo()}
         </div>
     );
 }
