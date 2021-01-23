@@ -22,7 +22,7 @@ const WeeklyChart = ({ data }) => {
       chart: {
         baseFont: "Titillium Web",
         animation: 1,
-        caption: "Number of commits over the last week by day.",
+        caption: "Number of commits each day over the last week.",
         xAxisName: "Day",
         yAxisName: "# of Commits",
         theme: "fusion",

@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Compare = () => {
+const CommitsChart = () => {
     return (
         <div>
-            Compare
+            
         </div>
     );
 }
 
-export default Compare;
+export default CommitsChart;

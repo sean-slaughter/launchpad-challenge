@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import WeeklyChart from './charts/WeeklyChart';
+import WeeklyChart from '../charts/WeeklyChart';
 import axios from 'axios';
-import YearlyChart from './charts/YearlyChart';
+import YearlyChart from '../charts/YearlyChart';
 import WeeklyCommits from './WeeklyCommits';
 import { CircularProgress, Grid, Icon, makeStyles } from '@material-ui/core';
 import YearlyCommits from './YearlyCommits';

@@ -1,9 +1,9 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import reposData from "./data/reposData";
-import Compare from "./components/repos/Compare";
+import Compare from "./components/repos/containers/Compare";
 import Home from "./components/containers/Home";
-import Repo from "./components/repos/Repo";
+import Repo from "./components/repos/containers/Repo";
 
 const Routes = () => {
   return (

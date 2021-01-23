@@ -21,7 +21,7 @@ const YearlyChart = ({ data }) => {
       chart: {
         baseFont: "Titillium Web",
         animation: 1,
-        caption: "Number of commits over the last year by week.",
+        caption: "Number of commits each week over the last year.",
         xAxisName: "Past Year",
         yAxisName: "# of Commits",
         theme: "fusion",

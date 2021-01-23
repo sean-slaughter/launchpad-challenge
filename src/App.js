@@ -4,7 +4,7 @@ import MainContainer from './components/containers/MainContainer';
 import SideNav from './components/containers/SideNav';
 
 const useStyles = makeStyles({
-  mainWrapper: {
+  root: {
     display: 'flex'
   }
 });
@@ -12,7 +12,7 @@ const useStyles = makeStyles({
 function App() {
   const classes = useStyles();
   return (
-    <div className={classes.mainWrapper}>
+    <div className={classes.root}>
       <SideNav/>
       <MainContainer/>
     </div>
