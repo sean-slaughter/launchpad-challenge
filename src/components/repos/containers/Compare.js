@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import reposData from "../../../data/reposData";
+import CommitsChart from "../charts/CompareWeeklyChart";
+import CompareWeeklyChart from "../charts/CompareWeeklyChart";
 
 const Compare = () => {
-    
+
   const [commitsData, setCommitsData] = useState({});
   const [starsAndIssuesData, setStarsAndIssuesData] = useState({});
   const [loading, setLoading] = useState(true);
@@ -28,7 +30,19 @@ const Compare = () => {
     fetchApiData();
   }, []);
 
-  return <div>Compare</div>;
+  const renderData = () => {
+      if(!loading){
+          return (
+              <CompareWeeklyChart data={commitsData}/>
+          )
+      }
+  } 
+
+  return (
+    <div>
+        {renderData()}
+    </div>
+);
 };
 
 export default Compare;

@@ -78,7 +78,7 @@ const Repo = ({repo}) => {
     }, [])
 
     //only render charts if data is loaded
-    const renderRepoInfo = () => {
+    const renderRepoData = () => {
         if(!loading){
             return (
               <Grid container justify="center" alignItems="center" spacing={3}>
@@ -125,7 +125,7 @@ const Repo = ({repo}) => {
     }
     return (
         <div>
-            {renderRepoInfo()}
+            {renderRepoData()}
         </div>
     );
 }
