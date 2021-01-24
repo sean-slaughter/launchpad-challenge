@@ -3,6 +3,7 @@ import axios from "axios";
 import reposData from "../../../data/reposData";
 import CommitsChart from "../charts/CompareWeeklyChart";
 import CompareWeeklyChart from "../charts/CompareWeeklyChart";
+import { CircularProgress } from "@material-ui/core";
 
 const Compare = () => {
 
@@ -10,32 +11,44 @@ const Compare = () => {
   const [starsAndIssuesData, setStarsAndIssuesData] = useState({});
   const [loading, setLoading] = useState(true);
 
-  const fetchApiData = () => {
+  const fetchApiData = async () => {
+
     const commitURL = "/stats/commit_activity";
-    const commits = {};
     const starsAndIssues = {};
+    const commits = {};
 
-    for (let i = 0; i < reposData.length; i++) {
-      const { name, github_url } = reposData[i];
-      axios.get(github_url + commitURL).then((resp) => (commits[name] = resp.data));
-      axios.get(github_url).then((resp) => (starsAndIssues[name] = resp.data));
+    for(let i = 0; i < reposData.length; i++){
+      const {name, github_url} = reposData[i];
+      const resp1 = await axios.get(github_url + commitURL);
+      const resp2 = await axios.get(github_url);
+      commits[name] = resp1.data;
+      starsAndIssues[name] = resp2.data;
     }
-
-    setCommitsData(commits);
-    setStarsAndIssuesData(starsAndIssues);
-    setLoading(false);
+    
+    return [commits, starsAndIssues]
   };
 
   useEffect(() => {
-    fetchApiData();
+    const setStateWithApiData = async () => {
+      const data = await fetchApiData();
+      setCommitsData(data[0]);
+      setStarsAndIssuesData(data[1]);
+      setLoading(false);
+    };
+    setStateWithApiData();
   }, []);
 
   const renderData = () => {
+      
       if(!loading){
+        console.log(commitsData)
           return (
               <CompareWeeklyChart data={commitsData}/>
           )
       }
+      else return (
+        <CircularProgress color="primary"/>
+    )
   } 
 
   return (
