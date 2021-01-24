@@ -24,8 +24,8 @@ const CompareYearlyChart = ({data}) => {
    
     const chartConfigs = {
         type: "msline",
-        width: "1000",
-        height: "300",
+        width: "1200",
+        height: "400",
         dataFormat: "json",
         dataSource: {
           chart: {

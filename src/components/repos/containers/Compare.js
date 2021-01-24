@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import reposData from "../../../data/reposData";
-import CommitsChart from "../charts/CompareWeeklyChart";
+import StarsChart from "../charts/StarsChart";
 import CompareWeeklyChart from "../charts/CompareWeeklyChart";
 import { CircularProgress, Grid } from "@material-ui/core";
 import CompareYearlyChart from "../charts/CompareYearlyChart";
+import OpenIssuesChart from "../charts/OpenIssuesChart";
 
 const Compare = () => {
 
@@ -46,6 +47,8 @@ const Compare = () => {
             <Grid>
               <CompareWeeklyChart data={commitsData}/>
               <CompareYearlyChart data={commitsData}/>
+              <StarsChart data={starsAndIssuesData}/>
+              <OpenIssuesChart data={starsAndIssuesData}/>
             </Grid>
           )
       }

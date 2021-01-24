@@ -43,7 +43,6 @@ const CompareWeeklyChart = ({ data }) => {
             { label: "Thu" },
             { label: "Fri" },
             { label: "Sat" },
-            { label: "Sun" },
           ],
         },
       ],
