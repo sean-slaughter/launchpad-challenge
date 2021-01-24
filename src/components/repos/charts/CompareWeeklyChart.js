@@ -12,7 +12,6 @@ const CompareWeeklyChart = ({ data }) => {
     return {
       seriesName: key,
       data: value[0].days.map((day) => {
-        console.log(day);
         return {
           value: day,
         };

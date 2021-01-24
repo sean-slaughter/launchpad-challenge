@@ -3,7 +3,8 @@ import axios from "axios";
 import reposData from "../../../data/reposData";
 import CommitsChart from "../charts/CompareWeeklyChart";
 import CompareWeeklyChart from "../charts/CompareWeeklyChart";
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress, Grid } from "@material-ui/core";
+import CompareYearlyChart from "../charts/CompareYearlyChart";
 
 const Compare = () => {
 
@@ -41,9 +42,11 @@ const Compare = () => {
   const renderData = () => {
       
       if(!loading){
-        console.log(commitsData)
           return (
+            <Grid>
               <CompareWeeklyChart data={commitsData}/>
+              <CompareYearlyChart data={commitsData}/>
+            </Grid>
           )
       }
       else return (
