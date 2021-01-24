@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import WeeklyChart from '../charts/WeeklyChart';
 import axios from 'axios';
 import YearlyChart from '../charts/YearlyChart';
@@ -36,45 +36,33 @@ const Repo = ({repo}) => {
     const [totalYearlyCommits, setTotalYearlyCommits] = useState(0);
     const [issues, setIssues] = useState(0);
     const [stars, setStars] = useState(0);
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true);
 
     //fetch data from Github API
-    const fetchRepoData = () =>{
+    const fetchRepoData = async () =>{
         const commitURL = "/stats/commit_activity";
-        axios.get(repo.github_url + commitURL)
-        .then(resp => setWeeklyAndYearlyCommits(resp.data))
-        .then(() => {
-            fetchStarsAndIssues();
-        })
-        .then(() => setLoading(false))
-    }
-
-    
-    const setWeeklyAndYearlyCommits = (data) => {
-        setYearlyCommitsData(data);
-        setWeeklyCommits(data[0]);
-        setTotalYearlyCommits(getTotal(data));
-    }
-
-    
-    const fetchStarsAndIssues = () => {
-        axios.get(repo.github_url)
-        .then(resp => setStarsAndIssues(resp.data))
-    }
-
-    const setStarsAndIssues = (data) =>{
-       setStars(data.stargazers_count);
-       setIssues(data.open_issues_count);
+        const resp1 = await axios.get(repo.github_url + commitURL);
+        const resp2 = await axios.get(repo.github_url);
+        return [resp1.data, resp2.data];
     }
 
     //get total number of yearly commits
     const getTotal = (data) => {
-        return data.reduce((acc, curr) => {return acc + curr.total}, 0)
+        return data.reduce((acc, curr) => {return acc + curr.total}, 0);
     }
 
     //fetch repo data after component mount
     useEffect(() => {
-       fetchRepoData();
+      const setStateWithApiData = async () => {
+        const data = await fetchRepoData();
+        setYearlyCommitsData(data[0]);
+        setTotalYearlyCommits(getTotal(data[0]));
+        setWeeklyCommits(data[0][0]);
+        setStars(data[1].stargazers_count);
+        setIssues(data[1].open_issues_count);
+        setLoading(false);
+      }
+      setStateWithApiData();
     }, [])
 
     //only render charts if data is loaded
@@ -88,7 +76,7 @@ const Repo = ({repo}) => {
                 <Grid item xs={8}>
                   <h1 className={classes.title}>{repo.name}</h1>
                 </Grid>
-                <Grid container direction="column" xs={6}>
+                <Grid container item direction="column" xs={6}>
                   <Grid item xs={12} className={classes.chart}>
                     <WeeklyChart data={weeklyCommits.days} />
                   </Grid>
@@ -96,7 +84,7 @@ const Repo = ({repo}) => {
                     <YearlyChart data={yearlyCommitsData} />
                   </Grid>
                 </Grid>
-                <Grid container direction="column" xs={6}>
+                <Grid container item direction="column" xs={6}>
                   <Grid item xs={12} className={classes.card}>
                     <WeeklyCommits
                       className={classes.card}
@@ -120,7 +108,7 @@ const Repo = ({repo}) => {
             );
         }
         else return (
-            <CircularProgress color="#22333b"/>
+            <CircularProgress color="primary"/>
         )
     }
     return (
