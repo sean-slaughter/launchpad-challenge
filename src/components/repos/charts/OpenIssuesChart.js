@@ -18,7 +18,7 @@ const OpenIssuesChart = ({data}) => {
     
     const chartConfigs = {
     type: "bar2d",
-    width: "500",
+    width: "400",
     height: "300",
     dataFormat: "json",
     dataSource: {

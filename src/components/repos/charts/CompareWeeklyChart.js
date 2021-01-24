@@ -21,7 +21,7 @@ const CompareWeeklyChart = ({ data }) => {
 
   const chartConfigs = {
     type: "msline",
-    width: "500",
+    width: "400",
     height: "300",
     dataFormat: "json",
     dataSource: {

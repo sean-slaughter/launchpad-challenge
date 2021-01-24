@@ -3,11 +3,25 @@ import axios from "axios";
 import reposData from "../../../data/reposData";
 import StarsChart from "../charts/StarsChart";
 import CompareWeeklyChart from "../charts/CompareWeeklyChart";
-import { CircularProgress, Grid } from "@material-ui/core";
+import { CircularProgress, Grid, makeStyles } from "@material-ui/core";
 import CompareYearlyChart from "../charts/CompareYearlyChart";
 import OpenIssuesChart from "../charts/OpenIssuesChart";
 
+const useStyles = makeStyles({
+  root: {
+    marginTop: 50,
+    marginLeft: -50
+  },
+  title: {
+    margin: 20,
+    fontSize: 100,
+    color: "#22333b"
+}
+})
+
 const Compare = () => {
+
+  const classes = useStyles();
 
   const [commitsData, setCommitsData] = useState({});
   const [starsAndIssuesData, setStarsAndIssuesData] = useState({});
@@ -44,11 +58,22 @@ const Compare = () => {
       
       if(!loading){
           return (
-            <Grid>
-              <CompareWeeklyChart data={commitsData}/>
-              <CompareYearlyChart data={commitsData}/>
-              <StarsChart data={starsAndIssuesData}/>
-              <OpenIssuesChart data={starsAndIssuesData}/>
+            <Grid className={classes.root}container justify="center" alignItems="center" spacing={3}>
+              <Grid item sm={12}>
+                <h1 className={classes.title}>Compare Framework Data</h1>
+              </Grid>
+              <Grid item sm={12}>
+                <CompareYearlyChart data={commitsData}/>
+              </Grid>
+              <Grid item sm={4}>
+                <CompareWeeklyChart data={commitsData}/>
+              </Grid>
+              <Grid item sm={4}>
+                <StarsChart data={starsAndIssuesData}/>
+              </Grid>
+              <Grid item sm={4}>
+                <OpenIssuesChart data={starsAndIssuesData}/>
+              </Grid>
             </Grid>
           )
       }
