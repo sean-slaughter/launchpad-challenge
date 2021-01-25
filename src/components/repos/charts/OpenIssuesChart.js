@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import ReactFC from "react-fusioncharts";
 import FusionCharts from "fusioncharts";
 import Bar2D from "fusioncharts/fusioncharts.charts";
@@ -6,17 +6,15 @@ import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 
 ReactFC.fcRoot(FusionCharts, Bar2D, FusionTheme);
 
+const OpenIssuesChart = ({ data }) => {
+  const chartData = Object.entries(data).map(([key, value]) => {
+    return {
+      label: key,
+      value: value.open_issues_count,
+    };
+  });
 
-const OpenIssuesChart = ({data}) => {
-
-    const chartData = Object.entries(data).map(([key, value]) => {
-        return {
-            label: key,
-            value: value.open_issues_count
-        }
-    })
-    
-    const chartConfigs = {
+  const chartConfigs = {
     type: "bar2d",
     width: "400",
     height: "300",
@@ -32,10 +30,10 @@ const OpenIssuesChart = ({data}) => {
         theme: "fusion",
       },
       data: chartData,
-    }}
+    },
+  };
 
-    return <ReactFC {...chartConfigs} />
-    
-}
+  return <ReactFC {...chartConfigs} />;
+};
 
 export default OpenIssuesChart;

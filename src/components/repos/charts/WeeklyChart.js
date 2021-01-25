@@ -7,12 +7,14 @@ import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
 const WeeklyChart = ({ data }) => {
-  const chartDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
+  //days for labels
+  const chartDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  //format chart data
   const chartData = chartDays.map((day, index) => {
     return { label: day, value: data[index] };
   });
-
+  //format chart configuration
   const chartConfigs = {
     type: "column2d",
     width: "500",

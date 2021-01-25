@@ -27,6 +27,7 @@ const Compare = () => {
   const [starsAndIssuesData, setStarsAndIssuesData] = useState({});
   const [loading, setLoading] = useState(true);
 
+  //fetch GitHub API data for all repositories
   const fetchApiData = async () => {
 
     const commitURL = "/stats/commit_activity";
@@ -44,16 +45,26 @@ const Compare = () => {
     return [commits, starsAndIssues]
   };
 
+  //set component state with GitHub API data
+  const setStateWithApiData = async () => {
+    const data = await fetchApiData();
+    setCommitsData(data[0]);
+    setStarsAndIssuesData(data[1]);
+    setLoading(false);
+  };
+
+//set state when component mounts
   useEffect(() => {
-    const setStateWithApiData = async () => {
-      const data = await fetchApiData();
-      setCommitsData(data[0]);
-      setStarsAndIssuesData(data[1]);
-      setLoading(false);
-    };
     setStateWithApiData();
   }, []);
 
+//set interval to retrieve data every minute
+  useEffect(() => {
+    const interval = setInterval(setStateWithApiData, 60000);
+    return clearInterval(interval);
+  }, []);
+
+//only render charts if data is loaded
   const renderData = () => {
       
       if(!loading){

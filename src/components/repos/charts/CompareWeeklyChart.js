@@ -8,6 +8,7 @@ ReactFC.fcRoot(FusionCharts, Line2D, FusionTheme);
 
 const CompareWeeklyChart = ({ data }) => {
 
+//format chart data
   const chartData = Object.entries(data).map(([key, value]) => {
     return {
       seriesName: key,
@@ -18,7 +19,7 @@ const CompareWeeklyChart = ({ data }) => {
       }),
     };
   });
-
+//format chart configs
   const chartConfigs = {
     type: "msline",
     width: "400",
@@ -53,7 +54,7 @@ const CompareWeeklyChart = ({ data }) => {
     },
   };
 
-  return <ReactFC {...chartConfigs}/>;
+  return <ReactFC {...chartConfigs} />;
 };
 
 export default CompareWeeklyChart;
