@@ -40,29 +40,34 @@
 	- TODO: Create a sidebar to navigate across the dashboard.
 
 - Acceptance criteria:
+
 	1. Data file exports an array of frameworks with name, api_url, dash_url, and icon attributes.
 	2. Sidebar loads home, ReactJS, VueJS, EmberJS, and comparison links from datafile.
 	3. Sidebar links navigate to correct routes. 
 
 1/21-22 notes:
+
 	- TODO: Store Github API data in Repo State
 	- TODO: Format data to be displayed in FusionChart components
 	- TODO: Format FusionChart components
 	- TODO: Display Repo’s charts inside of MainContainer component
  
 - Acceptance criteria:
+
 	1. Repo component makes fetch call to Github API on mount
 	2. Repo component refreshes api data consistently
 	3. Charts show meaningful data for each individual Repo
 	4. Compatible with new frameworks by just adding to repoData.js file
 
 1/23-24 notes:
+
 	- TODO: Create components for framework comparison
 	- TODO: Create charts for framework comparison
 	- TODO: Store Github API data in comparison components
 	- TODO: Display charts inside of Compare container
  
 - Acceptance criteria:
+
 	1. Compare component makes fetch call to Github API on mount
 	2. Compare component refreshes api data consistently
 	3. Charts show meaningful comparison data for JS frameworks
