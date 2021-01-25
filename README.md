@@ -1,10 +1,10 @@
 
 1/19 notes:
-##User stories:
-As a user I want to be able to visit the home page to get a description of the dashboard and its features.
-As a user, I want to be able to view the GitHub activity of each individual framework by itself.
-As a user, I want to be able to view the comparative analytics of two or more frameworks in order to determine the winning framework.
-As a user, I want to be able to easily add new frameworks and comparison points so that the codebase can be extended in the future.
+- User stories:
+	1. As a user I want to be able to visit the home page to get a description of the dashboard and its features.
+	2. As a user, I want to be able to view the GitHub activity of each individual framework by itself.
+	3. As a user, I want to be able to view the comparative analytics of two or more frameworks in order to determine the winning framework.
+	4. As a user, I want to be able to easily add new frameworks and comparison points so that the codebase can be extended in the future.
  
 ##Items to include in the dashboard:
 Commit activity: hourly, weekly, yearly. (to gauge community participation)
