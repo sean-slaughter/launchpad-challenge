@@ -3,11 +3,11 @@ import React from 'react';
 
 const useStyles = makeStyles({
     card: {
-        backgroundColor: "#22333b",
+        backgroundColor: "#e0e1dd",
         maxWidth: 300,
     },
     text: {
-        color: "white",
+        color: "#0d1b2a",
         fontSize: 40,
         fontFamily: 'Titillium Web'
     },

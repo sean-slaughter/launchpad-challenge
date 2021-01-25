@@ -29,6 +29,9 @@ const CompareYearlyChart = ({data}) => {
         dataFormat: "json",
         dataSource: {
           chart: {
+            drawAnchors: "0",
+            baseFontColor: "#0d1b2a",
+            bgColor: "#f3f3f4",
             baseFont: "Titillium Web",
             animation: 1,
             caption: "Number of commits each week over the last year.",

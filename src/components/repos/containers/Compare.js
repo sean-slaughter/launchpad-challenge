@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   title: {
     margin: 20,
     fontSize: 100,
-    color: "#22333b"
+    color: "#f3f3f4"
 }
 })
 
@@ -78,7 +78,13 @@ const Compare = () => {
           )
       }
       else return (
-        <CircularProgress color="primary"/>
+        <Grid container direction="row" justify="center" alignItems="center">
+            <Grid container direction="column" justify="center" alignItems="center">
+              <Grid item xs={12}>
+                <CircularProgress color="primary"/>
+              </Grid>
+            </Grid>
+        </Grid>
     )
   } 
 

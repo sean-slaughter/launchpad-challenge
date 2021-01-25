@@ -19,6 +19,9 @@ const YearlyChart = ({ data }) => {
     dataFormat: "json",
     dataSource: {
       chart: {
+        baseFontColor: "#0d1b2a",
+        bgColor: "#f3f3f4",
+        drawAnchors: "0",
         baseFont: "Titillium Web",
         animation: 1,
         caption: "Number of commits each week over the last year.",

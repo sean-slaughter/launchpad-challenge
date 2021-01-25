@@ -9,12 +9,12 @@ const useStyles = makeStyles({
        width: "20%"
     },
     sidenav:{
-        background: "#22333b",
-        color: "white",
+        background: "#e0e1dd",
+        color: "#1b263b",
         fontSize: 25 
     },
     sidenavIcon: {
-        color: "white"
+        color: "#1b263b"
     },
     listItemText: {
         fontSize: 25,

@@ -4,7 +4,7 @@ import Routes from "../../Routes";
 
 const useStyles = makeStyles({
   root: {
-    backgroundColor: "#eae0d5",
+    backgroundColor: "#0d1b2a",
     width: "100%",
     height: "100vh",
     paddingLeft: "15vw",

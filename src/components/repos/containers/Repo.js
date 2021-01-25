@@ -18,12 +18,12 @@ const useStyles = makeStyles({
     icon: {
         margin: 20,
         fontSize: 150,
-        color: "#22333b"
+        color: "#e0e1dd"
     },
     title: {
         margin: 20,
         fontSize: 150,
-        color: "#22333b"
+        color: "#e0e1dd"
     }
 })
 
@@ -108,7 +108,13 @@ const Repo = ({repo}) => {
             );
         }
         else return (
-            <CircularProgress color="primary"/>
+          <Grid container direction="row" justify="center" alignItems="center">
+            <Grid container direction="column" justify="center" alignItems="center">
+              <Grid item xs={12}>
+                <CircularProgress color="primary"/>
+              </Grid>
+            </Grid>
+          </Grid>
         )
     }
     return (
