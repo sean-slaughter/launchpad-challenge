@@ -8,9 +8,9 @@
 	4. As a user, I want to be able to easily add new frameworks and comparison points so that the codebase can be extended in the future.
  
 - Items to include in the dashboard:
-	-Commit activity: hourly, weekly, yearly. (to gauge community participation)
-	-Stars (to gauge popularity)
-	-Issues (to gauge stability)
+	- Commit activity: hourly, weekly, yearly. (to gauge community participation)
+	- Stars (to gauge popularity)
+	- Issues (to gauge stability)
 
 - Initial components necessary:
 	1.Navbar
