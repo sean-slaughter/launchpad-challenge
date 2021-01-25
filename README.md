@@ -13,7 +13,7 @@
 	- Issues (to gauge stability)
 
 - Initial components necessary:
-	1.Navbar
+	1. Navbar
  		- Links to each framework
  		- Link to home
  		- Link to comparison container
