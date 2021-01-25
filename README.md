@@ -1,70 +1,87 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1/19 notes:
+User stories:
+As a user I want to be able to visit the home page to get a description of the dashboard and its features.
+As a user, I want to be able to view the GitHub activity of each individual framework by itself.
+As a user, I want to be able to view the comparative analytics of two or more frameworks in order to determine the winning framework.
+As a user, I want to be able to easily add new frameworks and comparison points so that the codebase can be extended in the future.
+ 
+Items to include in the dashboard:
+Commit activity: hourly, weekly, yearly. (to gauge community participation)
+Stars (to gauge popularity)
+Issues (to gauge stability)
 
-## Available Scripts
+Initial components necessary:
+Navbar
+ - Links to each framework
+ - Link to home
+ - Link to comparison container
+Main page container
+ - Loads what we are navigating to
+ - Individual repo container
+ - Shows individual framework stats
+ - Loads from data file
+Comparison container
+ - Shows comparison analytics between current frameworks.
+Data file to contain framework information (GitHub API url, name, dashboard url, sidebar icon)
+ 
+Dependencies:
+React-router-dom
+Material-UI
+React Icons
+FusionChart
+ 
+ 
+1/20 notes:
+TODO: Create tests for acceptance criteria.
+TODO: Create a data file for storing framework information.
+TODO: Create a sidebar to navigate across the dashboard.
 
-In the project directory, you can run:
+Acceptance criteria:
+1. Data file exports an array of frameworks with name, api_url, dash_url, and icon attributes.
+2. Sidebar loads home, ReactJS, VueJS, EmberJS, and comparison links from datafile.
+3. Sidebar links navigate to correct routes. 
 
-### `yarn start`
+1/21-22 notes:
+	TODO: Store Github API data in Repo State
+	TODO: Format data to be displayed in FusionChart components
+	TODO: Format FusionChart components
+	TODO: Display Repo’s charts inside of MainContainer component
+ 
+	Acceptance criteria:
+1. Repo component makes fetch call to Github API on mount
+2. Repo component refreshes api data consistently
+3. Charts show meaningful data for each individual Repo
+4. Compatible with new frameworks by just adding to repoData.js file
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1/23-24 notes:
+	TODO: Create components for framework comparison
+	TODO: Create charts for framework comparison
+	TODO: Store Github API data in comparison components
+	TODO: Display charts inside of Compare container
+ 
+	Acceptance criteria:
+1. Compare component makes fetch call to Github API on mount
+2. Compare component refreshes api data consistently
+3. Charts show meaningful comparison data for JS frameworks
+4. New items added to charts by just adding to repoData.js file
+ 
+Final thoughts-
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Things that I learned while doing this coding challenge:
 
-### `yarn test`
+ - I got a better understanding of JS Promises and how they work with async functions and the await keyword. I ran into some difficulties passing Repo data into the charts until I took a second to really break down what was happening with the API calls.
+ 
+ - I used FusionCharts to display the repo data which is a tool that I had never used before, I thought it was really interesting to figure out how to format and configure the data.
+ 
+ - I got a better understanding of the useEffect hook, and how to use a setInterval function inside of it. At first I had trouble getting the components to make api calls every 10 seconds to keep the data inside of the charts fresh without page refreshes. I took some time to learn more about the useEffect hook and figured out how to implement a setInterval inside of it.
+ 
+Things that I would do differently if I could do this again:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+ - I think that I would use a Redux store for the data that would be used by all components. At first I thought that a Redux store wouldn’t be necessary because only two containers needed to get API data, but I think that using Redux to keep fresh API data in a store that all components would easily be able to access would help clean up some of this code.
+ 
+- I would implement a MaterialUI theme with a color palette to make changing the color scheme easier, currently I would have to update colors in a lot of different places. I would also move the styles from each component into a separate file to clean up some of the code. 
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+ - I would figure out a way to create charts from the repoData.js file (or maybe a separate data file), currently if you wanted to add a new comparison chart you would have to create a component for it. I would like to have a file that stores all the needed chart configurations and render the charts dynamically based on that information.
+ 
+ - Make the dashboard responsive to ensure consistency across different screen sizes and mobile devices.
