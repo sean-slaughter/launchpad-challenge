@@ -7,13 +7,14 @@ import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 ReactFC.fcRoot(FusionCharts, Bar2D, FusionTheme);
 
 const OpenIssuesChart = ({ data }) => {
+    //format chart data
   const chartData = Object.entries(data).map(([key, value]) => {
     return {
       label: key,
       value: value.open_issues_count,
     };
   });
-
+  //format chart configuration
   const chartConfigs = {
     type: "bar2d",
     width: "400",

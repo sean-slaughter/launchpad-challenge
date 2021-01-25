@@ -19,7 +19,7 @@ const CompareWeeklyChart = ({ data }) => {
       }),
     };
   });
-//format chart configs
+//format chart configuration
   const chartConfigs = {
     type: "msline",
     width: "400",

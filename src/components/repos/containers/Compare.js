@@ -16,7 +16,10 @@ const useStyles = makeStyles({
     margin: 20,
     fontSize: 100,
     color: "#f3f3f4"
-}
+  },
+  loading: {
+    marginTop: "40vh"
+  }
 })
 
 const Compare = () => {
@@ -58,11 +61,11 @@ const Compare = () => {
     setStateWithApiData();
   }, []);
 
-//set interval to retrieve data every minute
+  //set interval to keep reloading api data
   useEffect(() => {
-    const interval = setInterval(setStateWithApiData, 60000);
-    return clearInterval(interval);
-  }, []);
+    const id = setInterval(setStateWithApiData, 10000);
+    return () => clearInterval(id)
+  },[loading]);
 
 //only render charts if data is loaded
   const renderData = () => {
@@ -89,12 +92,11 @@ const Compare = () => {
           )
       }
       else return (
+        //loading circle
         <Grid container direction="row" justify="center" alignItems="center">
-            <Grid container direction="column" justify="center" alignItems="center">
-              <Grid item xs={12}>
-                <CircularProgress color="primary"/>
+              <Grid className={classes.loading} item xs={12}>
+                <CircularProgress size={100} color="primary"/>
               </Grid>
-            </Grid>
         </Grid>
     )
   } 

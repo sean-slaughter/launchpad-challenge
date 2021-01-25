@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import WeeklyChart from "../charts/WeeklyChart";
 import axios from "axios";
 import YearlyChart from "../charts/YearlyChart";
@@ -25,10 +25,12 @@ const useStyles = makeStyles({
     fontSize: 150,
     color: "#e0e1dd",
   },
+  loading: {
+    marginTop: "40vh"
+  }
 });
 
 const Repo = ({ repo }) => {
-
   const classes = useStyles();
 
   const [weeklyCommits, setWeeklyCommits] = useState(0);
@@ -48,7 +50,7 @@ const Repo = ({ repo }) => {
 
   //set component state with api data
   const setStateWithApiData = async () => {
-    console.log("inside setstatewithapidata")
+    console.log("inside setstatewithapidata");
     const data = await fetchRepoData();
     setYearlyCommitsData(data[0]);
     setTotalYearlyCommits(getTotal(data[0]));
@@ -72,9 +74,9 @@ const Repo = ({ repo }) => {
 
   //set interval to keep reloading api data
   useEffect(() => {
-    const interval = setInterval(setStateWithApiData, 2000);
-    return clearInterval(interval);
-  }, []);
+    const id = setInterval(setStateWithApiData, 10000);
+    return () => clearInterval(id);
+  }, [loading]);
 
   //only render charts if data is loaded
   const renderRepoData = () => {
@@ -120,16 +122,9 @@ const Repo = ({ repo }) => {
     } else
       return (
         <Grid container direction="row" justify="center" alignItems="center">
-          <Grid
-            container
-            direction="column"
-            justify="center"
-            alignItems="center"
-          >
-            <Grid item xs={12}>
-              <CircularProgress color="primary" />
+            <Grid className={classes.loading} item xs={12}>
+              <CircularProgress size={100} color="primary" />
             </Grid>
-          </Grid>
         </Grid>
       );
   };

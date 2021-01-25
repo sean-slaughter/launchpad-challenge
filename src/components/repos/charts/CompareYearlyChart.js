@@ -48,7 +48,6 @@ const CompareYearlyChart = ({data}) => {
         },
       };
 
-      console.log(chartData)
     return <ReactFC {...chartConfigs} />;
 }
 
